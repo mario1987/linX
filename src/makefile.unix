@@ -3,14 +3,6 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 
-rm -rf leveldb
-mv leveldb-lin leveldb
-cd leveldb
-chmod +x build_detect_platform
-make clean
-make libmemenv.a libleveldb.a
-cd ..
-
 # :=0 --> UPnP support turned off by default at runtime
 # :=1 --> UPnP support turned on by default at runtime
 # :=- --> No UPnP support - miniupnp not required
