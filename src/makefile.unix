@@ -2,6 +2,15 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+
+rm -rf leveldb
+mv leveldb-lin leveldb
+cd leveldb
+chmod +x build_detect_platform
+make clean
+make libmemenv.a libleveldb.a
+cd ..
+
 # :=0 --> UPnP support turned off by default at runtime
 # :=1 --> UPnP support turned on by default at runtime
 # :=- --> No UPnP support - miniupnp not required
@@ -96,7 +105,7 @@ LIBS+= \
     # -D_FORTIFY_SOURCE=2 does some checking for potentially exploitable code patterns in
     # the source such overflowing a statically defined buffer.
     HARDENING+=-U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2
-#
+leveldb#
 
 
 DEBUGFLAGS=-g
@@ -109,6 +118,8 @@ xCXXFLAGS=-O2 -pthread -Wall -Wextra -Wformat -Wformat-security -Wno-unused-para
 # LDFLAGS can be specified on the make command line, so we use xLDFLAGS that only
 # adds some defaults in front. Unfortunately, LDFLAGS=... $(LDFLAGS) does not work.
 xLDFLAGS=$(LDHARDENING) $(LDFLAGS)
+
+
 
 OBJS= \
     leveldb/libleveldb.a \
